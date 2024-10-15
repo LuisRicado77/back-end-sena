@@ -1,9 +1,9 @@
 import express, { Request, Response } from "express";
-import { houseRouter } from "./modules/house/house.router";
+
 
 import { Parameter } from "./utils/constants";
 
-import { initDatabase } from "./database/mongo";
+import { initDatabase } from "./infrastructue/database/mongo";
 
 
 
@@ -11,7 +11,7 @@ import { initDatabase } from "./database/mongo";
 const app = express();
 app.use(express.json());
 //call modules and add specific routes
-app.use("/house",houseRouter);
+//app.use("/house",houseRouter);
 
 
 
