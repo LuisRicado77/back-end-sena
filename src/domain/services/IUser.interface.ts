@@ -7,5 +7,6 @@ export interface IUserService{
     deleteUser:(id: IUser['id']) => Promise<void>
     getUserById:(id: IUser['id']) => Promise<IUser>
     getAllUsers:() => Promise<IUser[]>
+    getAllUsersByRol:(rol: IUser['rol']) => Promise<IUser[]>
     
 }
