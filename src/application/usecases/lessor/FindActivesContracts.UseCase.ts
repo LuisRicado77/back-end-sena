@@ -14,7 +14,7 @@ export class FindActivesContracts{
             const contract = await this.contractSrv.getActivesContracts();
             return contract;
         } catch (error) {
-            throw error || new GetError("Could not get contract")
+            throw error || new GetError("Could not get contracts")
             
         }
 

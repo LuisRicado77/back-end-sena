@@ -16,6 +16,7 @@ export interface IProperty{
     description?: string
     images?:string,
     ownerId: string
+    active: boolean
 
 }
 

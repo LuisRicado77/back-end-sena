@@ -7,7 +7,8 @@ export interface IContract {
     contractType: string,
     contratAmount: number,
     contractStatus: string, //cancel, living, waiting
-    specialConditions: string
+    specialConditions: string,
+    active: boolean
 
 
 }

@@ -6,6 +6,7 @@ export interface IReview{
     nameUser: string,
     namePropertyCheck: string,
     status: string,
+    active: boolean
 
 }
 
