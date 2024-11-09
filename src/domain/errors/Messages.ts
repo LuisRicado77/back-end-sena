@@ -1,5 +1,9 @@
 export enum ERROR_MESSAGE{
     NOT_CREATED = "ERR_001",
     NOT_FOUND = "ERR_002",
-    NOT_SEND_ERROR = "ERR_003"
+    NOT_SEND_ERROR = "ERR_003",
+    NOT_SAVED = "ERR_004",
+    NOT_DELETED = "ERR_005",
+    NOT_UPDATED = "ERR_006",
+    NOT_GET = "ERR_007"
 }
