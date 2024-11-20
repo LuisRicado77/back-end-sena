@@ -3,7 +3,7 @@ import { IProperty } from "../../../domain/interfaces/IProperty.interface";
 import { IPropertyService } from "../../../domain/services/IProperty.service";
 
 
-export class AddProperty{
+export class AddPropertyUseCase{
     constructor(private readonly propertySrv: IPropertyService){
 
     }

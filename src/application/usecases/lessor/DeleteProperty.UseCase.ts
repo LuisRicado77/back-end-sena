@@ -2,10 +2,10 @@ import { DeleteError } from "../../../domain/errors/DeleteError";
 import { NotFoundError } from "../../../domain/errors/NotFoundError";
 import { IProperty } from "../../../domain/interfaces/IProperty.interface";
 import { IPropertyService } from "../../../domain/services/IProperty.service";
-import { FindProperty } from './FindProperty.UseCase';
+import { FindPropertyUseCase } from './FindProperty.UseCase';
 
 
-export class DeleteProperty{
+export class DeletePropertyUseCase{
     constructor(private readonly propertySrv: IPropertyService){
 
     }

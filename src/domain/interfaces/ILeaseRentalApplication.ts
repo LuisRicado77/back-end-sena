@@ -2,7 +2,7 @@ export interface ILeaseRentalApplication {
    id:string,
    idProperty: string,
    idTenant:string,
-   state: 'Acceted'|'Reject'|'pending',
+   state: 'Accepted'|'Reject'|'pending',
    dateRequest: Date,
    active: boolean
 

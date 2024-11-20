@@ -2,7 +2,7 @@ import { GetError } from "../../../domain/errors/GetError";
 import { IContractService } from "../../../domain/services/IContract.service";
 
 
-export class FindActivesContracts{
+export class FindActivesContractsUseCase{
     constructor(
         private readonly contractSrv: IContractService
     ){

@@ -2,7 +2,7 @@ import { GetError } from "../../../domain/errors/GetError";
 import { IPropertyService } from "../../../domain/services/IProperty.service";
 
 
-export class FindProperty{
+export class FindPropertyUseCase{
     
     constructor(private readonly propertySrv: IPropertyService){
 
