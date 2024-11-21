@@ -1,9 +1,10 @@
-import { ILeaseRentalApplication } from '../interfaces/ILeaseRentalApplication';
+import { ILeaseRentalApplication, ILeaseRentalApplicationCreate } from '../interfaces/ILeaseRentalApplication';
 
-export interface ILeaseRentalApplicationService {
+export interface ILeaseRentalApplicationService {   
     execute(idSolicitud: string, accion: 'accept' | 'reject'): Promise<void>;
     findById(id:ILeaseRentalApplication['id']):Promise<ILeaseRentalApplication>
     update(id:ILeaseRentalApplication['id'],leaseRentalApplication: ILeaseRentalApplication):Promise<void>
+    sendRedquest(leaseRentalApplication: ILeaseRentalApplicationCreate):Promise<boolean>;
     
   }
   

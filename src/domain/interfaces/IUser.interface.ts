@@ -6,8 +6,8 @@ export interface IUser{
     email:    String,
     phone:    string,
     location: string,
-    rol:      string,
-    active: boolean
+    rol:      string,//lessor, //tenant
+    active:    boolean
 }
 
 export interface IUserCreate extends Omit<IUser, "id">{
