@@ -10,5 +10,5 @@ export interface IUserService{
     getAllUsersByRol:(rol: IUser['rol']) => Promise<IUser[]>
     findByEmail(email: IUser['email']):Promise<IUser>;
     verifyPassword(password: string, user:IUser):Promise<boolean>
-    changePassword():Promise<string>
+    changePassword(newPassword:string):Promise<string>
 }
