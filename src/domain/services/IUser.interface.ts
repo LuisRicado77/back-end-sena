@@ -1,4 +1,4 @@
-import { IUser,IUserCreate } from "../interfaces/IUser.interface";
+import { IUser, IUserCreate } from '../interfaces/IUser.interface';
 
 export interface IUserService{
     registerUser:(user: IUserCreate) =>Promise<IUser>
@@ -8,5 +8,7 @@ export interface IUserService{
     getUserById:(id: IUser['id']) => Promise<IUser>
     getAllUsers:() => Promise<IUser[]>
     getAllUsersByRol:(rol: IUser['rol']) => Promise<IUser[]>
-    
+    findByEmail(email: IUser['email']):Promise<IUser>;
+    verifyPassword(password: string, user:IUser):Promise<boolean>
+    changePassword():Promise<string>
 }
