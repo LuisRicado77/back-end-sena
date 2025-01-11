@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import { createOrder, captureOrder, cancelPayment } from './pyment.controller';
-
+import { createOrder, captureOrder, cancelPayment } from './payment.controller';
 const router = Router();
 
 router.post('/create-order', createOrder);

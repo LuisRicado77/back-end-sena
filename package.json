@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/express": "^5.0.0",
+    "@types/sequelize": "^4.28.20",
     "@types/typescript": "^2.0.0",
     "axios": "^1.7.9",
     "cors": "^2.8.5",
@@ -20,7 +21,10 @@
     "joi": "^17.13.3",
     "mongoose": "^8.7.0",
     "morgan": "^1.10.0",
+    "mysql2": "^3.11.5",
     "node-fetch": "^3.3.2",
+    "sequelize": "^6.37.5",
+    "sequelize-typescript": "^2.1.6",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.6.2"
   },

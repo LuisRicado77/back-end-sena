@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import axios from 'axios';
 import { PAYPAL_API, PAYPAL_API_CLIENT, PAYPAL_API_SECRET } from '../../../config';
 
-export const createOrder = async (req: Request, res: Response, next: NextFunction):Promise<any>  => {
+export const createOrder = async (req: Request, res: Response):Promise<any>  => {
   try {
     const order = {
       intent: "CAPTURE",
@@ -57,7 +57,10 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
   }
 };
 
-export const captureOrder = async (req: Request, res: Response, next: NextFunction):Promise<any>  => {
+
+
+
+export const captureOrder = async (req: Request, res: Response):Promise<any>  => {
   const { token } = req.query;
 
   try {
@@ -79,6 +82,6 @@ export const captureOrder = async (req: Request, res: Response, next: NextFuncti
   }
 };
 
-export const cancelPayment = (req: Request, res: Response, next: NextFunction) => {
+export const cancelPayment = (req: Request, res: Response) => {
   res.redirect("/");
 };
