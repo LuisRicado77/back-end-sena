@@ -1,24 +1,38 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../sequelize";
+import { PrimaryKey } from "sequelize-typescript";
+import { User } from "./user.model";
+import { Payment } from "./payment.model";
 
 
-class receipt extends Model{}
+export class Receipt extends Model{}
 
 
-receipt.init(
+Receipt.init(
     {
         idReceipt: {
-            type: DataTypes.NUMBER
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            allowNull:false
         },
         issueDate: {
-            type: DataTypes.DATE
+            type: DataTypes.DATE,
+            allowNull:false
         },
         amountReceived:{
-            type: DataTypes.DECIMAL
+            type: DataTypes.FLOAT(50),
+            allowNull:false
+        },
+        isActive:{
+            type: DataTypes.INTEGER
         }
     },
     {
         sequelize,
-        modelName: "receipt"
+        modelName: "receipt",
+        tableName: 'receipts',
+        timestamps: true
     }
 )
+Receipt.belongsTo(User),
+Receipt.belongsTo(Payment)//listo listo

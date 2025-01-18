@@ -1,26 +1,41 @@
 
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../sequelize";
+import { User } from "./user.model";
 
 
-class rol extends Model{
-
+export class Rol extends Model{
+  
 }
 
-rol.init(
+Rol.init(
   {
     idRol:{
-      type: DataTypes.NUMBER
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull:false
     },
     name:{
-      type:DataTypes.STRING
-    }
+      type:DataTypes.STRING,
+      allowNull:false
+    },
+    isActive:{
+      type: DataTypes.INTEGER
+  }
   },
   {
     sequelize,
-    modelName: "rol"
+    modelName: "Rol",
+    tableName: 'rols',
+    timestamps: true,
+    
   }
 )
+Rol.hasMany(User,{
+  foreignKey: 'IdRol'
+})//listo listo
+
+
 
 
 

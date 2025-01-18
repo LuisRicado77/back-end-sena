@@ -1,32 +1,49 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../sequelize";
+import { User } from "./user.model";
+import { Receipt } from "./receipt.model";
 
 
-class payment extends Model{
+export class Payment extends Model{
 }
 
 
-payment.init(
+Payment.init(
     {
         idPayment: {
-            type: DataTypes.STRING
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            allowNull:false
         },
         status: {
-            type: DataTypes.STRING
+            type: DataTypes.TEXT,
+            allowNull:false
         },
         amount: {
-            type: DataTypes.DECIMAL
+            type: DataTypes.DECIMAL,
+            allowNull:false
         },
         date: {
-            type: DataTypes.DATE
+            type: DataTypes.DATE,
+            allowNull:false
         },
         paymentMethod: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull:false
+        },
+        isActive:{
+            type: DataTypes.INTEGER
         }
     },
     {
         sequelize,
-        modelName: "payment"
+        modelName: "Payment",
+        tableName: 'payments',
+        timestamps: true
     }
     
 )
+Payment.belongsTo(User)//listo listo
+Payment.hasMany(Receipt,{
+    foreignKey: 'IdPayment'
+})

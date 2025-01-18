@@ -1,33 +1,49 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../sequelize";
+import { User } from "./user.model";
+import { Property } from "./property.model";
 
 
-class review extends Model{
+export class Review extends Model{
 
 }
 
 
 
-review.init(
+Review.init(
     {
         idReview:{
-            type: DataTypes.NUMBER
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            allowNull:false
         },
         content:{
-            type:DataTypes.STRING
+            type:DataTypes.STRING,
+            allowNull:false
         },
         rating: {
-            type:DataTypes.NUMBER
+            type:DataTypes.NUMBER,
+            allowNull:false
         },
         date: {
-            type: DataTypes.DATE
+            type: DataTypes.DATE,
+            allowNull:false
         },
         status: {
-            type: DataTypes.STRING
+            type: DataTypes.TEXT,
+            allowNull:false
+        },
+        isActive:{
+            type: DataTypes.INTEGER
         }
     },
     {
         sequelize,
-        modelName: "review"
+        modelName: "Review",
+        tableName: 'reviews',
+        timestamps: true
     }
 )
+
+Review.belongsTo(User),
+Review.belongsTo(Property)//listo listo
