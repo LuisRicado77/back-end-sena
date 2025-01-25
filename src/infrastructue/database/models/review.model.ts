@@ -1,49 +1,54 @@
-import { DataTypes, Model } from "sequelize";
-import { sequelize } from "../sequelize";
-import { User } from "./user.model";
-import { Property } from "./property.model";
+import { DataType, Model, Sequelize , Table,Column, AutoIncrement} from "sequelize-typescript";
 
 
+@Table({
+    timestamps:true,
+    tableName: "reviews"
+})
 export class Review extends Model{
+    
+    @Column({
+        type: DataType.INTEGER,
+        primaryKey: true,
+        allowNull:false,
+        autoIncrement: true
+    },)
+    idReview!: number
 
+
+    @Column({
+        type:DataType.STRING,
+        allowNull:false
+    },)
+    content!:string
+
+
+    @Column( {
+        type:DataType.DATE,
+        allowNull:false
+    },)
+    date!:Date
+
+
+    @Column({
+        type: DataType.INTEGER,
+        allowNull:false
+    },) 
+    rating!:number
+
+    
+    @Column( {
+        type: DataType.TEXT,
+        allowNull:false
+    },)
+    status!:string
+
+
+    @Column({
+        type: DataType.INTEGER
+    })
+    isActive!: number
 }
 
 
 
-Review.init(
-    {
-        idReview:{
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            allowNull:false
-        },
-        content:{
-            type:DataTypes.STRING,
-            allowNull:false
-        },
-        rating: {
-            type:DataTypes.NUMBER,
-            allowNull:false
-        },
-        date: {
-            type: DataTypes.DATE,
-            allowNull:false
-        },
-        status: {
-            type: DataTypes.TEXT,
-            allowNull:false
-        },
-        isActive:{
-            type: DataTypes.INTEGER
-        }
-    },
-    {
-        sequelize,
-        modelName: "Review",
-        tableName: 'reviews',
-        timestamps: true
-    }
-)
-
-Review.belongsTo(User),
-Review.belongsTo(Property)//listo listo

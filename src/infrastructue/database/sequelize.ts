@@ -1,22 +1,20 @@
-import { Sequelize } from "sequelize";
+import { Sequelize } from "sequelize-typescript";
+import { Contract } from "./models/contract.model";
+import { Review } from "./models/review.model";
+import { Rol } from "./models/rol.model";
+import { Rental } from "./models/rental.model";
+import { Receipt } from "./models/receipt.model";
+import { Property } from "./models/property.model";
+import { Payment } from "./models/payment.model";
+import { User } from "./models/user.model";
 
-
-export const sequelize = new Sequelize({
-  dialect: 'mysql',
-  host: 'localhost',
+const sequelize = new Sequelize({
+  database: 'testsena',
+  dialect: 'mysql', // o 'postgres', 'sqlite', etc.
   username: 'root',
   password: '',
-  database: 'testsena',
-  port: 3306,
+  models: [User,Contract,Review, Rol, Rental, Receipt, Property, Payment], 
+  logging: console.log
 });
 
-
-export async function testConnection() {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-}
-
+export default sequelize;

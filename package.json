@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-dev": "ts-node-dev src/index.ts"
+    "start-dev": "ts-node-dev src/index.ts",
+    "run-dev": "ts-node-dev src/app.ts"
   },
   "keywords": [],
   "author": "",
@@ -21,8 +22,9 @@
     "joi": "^17.13.3",
     "mongoose": "^8.7.0",
     "morgan": "^1.10.0",
-    "mysql2": "^3.11.5",
+    "mysql2": "^3.12.0",
     "node-fetch": "^3.3.2",
+    "reflect-metadata": "^0.2.2",
     "sequelize": "^6.37.5",
     "sequelize-typescript": "^2.1.6",
     "ts-node-dev": "^2.0.0",

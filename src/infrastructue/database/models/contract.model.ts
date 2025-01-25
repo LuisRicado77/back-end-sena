@@ -1,47 +1,52 @@
-import { Model, DataTypes } from "sequelize";
-import { sequelize } from "../sequelize";
-import { User } from "./user.model";
-import { Property } from "./property.model";
 
-export class Contract extends Model{}
+import { Table,Column, Model,HasMany, DataType } from "sequelize-typescript";
 
+@Table({
+  tableName: 'contracts',
+  timestamps:true
+ })
+export class Contract extends Model {
+  @Column({
+    type: DataType.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+    onDelete: "CASCADE", onUpdate: "CASCADE"
+  },) 
+  idContract!: number;
 
-Contract.init(
+  @Column( {
+    type: DataType.DATE,
+    allowNull: false,
+  },)
+  startDate!: Date;
+
+  @Column({
+    type: DataType.DATE,
+  }) 
+  endDate!: Date;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  },) 
+  typeContract!:string;
+
+  @Column({
+    type: DataType.FLOAT(50),
+    allowNull: false,
+  },) 
+  contractAmount!: number;
+
+  @Column(
     {
-        idContract: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            allowNull:false
-        },
-        startDate: {
-            type: DataTypes.DATE,
-            allowNull:false
-        },
-        endDate: {
-            type: DataTypes.DATE,
-        },
-        typeContract: {
-            type: DataTypes.STRING,
-            allowNull:false
-        },
-        contractAmount: {
-            type: DataTypes.FLOAT(50),
-            allowNull:false
-        },
-        status: {
-            type: DataTypes.TEXT
-        },
-        isActive:{
-            type: DataTypes.INTEGER
-        }
+      type: DataType.TEXT,
     },
-    {
-        sequelize,
-        modelName: 'Contract',
-        tableName: 'contracts',
-        timestamps: true
-    }
+  )
+  status!:string;
 
-)
-Contract.belongsTo(User),
-Contract.belongsTo(Property)//listo listo
+  @Column( {
+    type: DataType.INTEGER,
+  },)
+  isActive!: string;
+  
+}

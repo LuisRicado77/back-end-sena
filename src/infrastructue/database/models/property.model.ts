@@ -1,95 +1,127 @@
-import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../sequelize';
-import { User } from './user.model';
-import { Contract } from './contract.model';
-import { Rental } from './rental.model';
-import { Review } from './review.model';
+import { Table,Column, Model,HasMany, DataType } from "sequelize-typescript";
 
 
-export class Property extends Model{}
+@Table({
+  tableName: "properties",
+  timestamps: true
+})
+export class Property extends Model {
+   
+  @Column( {
+    type: DataType.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+    onDelete: "CASCADE", onUpdate: "CASCADE"
+  },)
+  idProperty!: number
 
+  @Column( {
+    type: DataType.STRING,
+    allowNull: false,
+  },)
+  typeProperty!: string
 
-Property.init(
+  @Column( {
+    type: DataType.STRING,
+    allowNull: false,
+  },)
+  address!: string
+
+  @Column( {
+    type: DataType.STRING,
+    allowNull: false,
+  },)
+  city!: string
+
+  @Column(
     {
-        idProperty: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            allowNull:false
-        },
-        typeProperty: {
-            type: DataTypes.STRING,
-            allowNull:false
-        },
-        address: {
-            type: DataTypes.STRING,
-            allowNull:false
-        },
-        city: {
-            type: DataTypes.STRING,
-            allowNull:false
-        },
-        state: {
-            type: DataTypes.STRING,
-            allowNull:false
-        },
-        country: {
-            type: DataTypes.STRING,
-            allowNull:false
-        },
-        zipCode: {
-            type: DataTypes.INTEGER,
-            allowNull:false
-        },
-        numberRooms: {
-            type: DataTypes.INTEGER
-        },
-        numberBathrooms: {
-            type: DataTypes.INTEGER
-        },
-        squareMeters: {
-            type: DataTypes.FLOAT
-        },
-        rentalPrice: {
-            type: DataTypes.FLOAT
-        },
-        status: {
-            type: DataTypes.TEXT,
-            allowNull:true
-        },
-        foto1: {
-            type: DataTypes.STRING,
-            allowNull:true
-        },
-        foto2: {
-            type: DataTypes.STRING,
-            allowNull:true
-        },
-        foto3: {
-            type: DataTypes.STRING,
-            allowNull:true
-        },
-        foto4: {
-            type: DataTypes.STRING,
-            allowNull:true
-        },
-        foto5: {
-            type: DataTypes.STRING,
-            allowNull:true
-        },
-        isActive:{
-            type: DataTypes.INTEGER
-        }
-
+      type: DataType.STRING,
+      allowNull: false,
     },
+  )
+  state!: string
+
+  @Column(
     {
-        sequelize,
-        modelName: "Property",
-        tableName: 'properties',
-        timestamps: true
-    }
-)
+      type: DataType.STRING,
+      allowNull: false,
+    },
+  ) 
+  country!: string
+
+  @Column( {
+    type: DataType.INTEGER,
+    allowNull: false,
+  },)
+  zipCode!: number
+  
+  @Column( {
+    type: DataType.INTEGER,
+  },)
+  numberRooms!: number
+
+  @Column( {
+    type: DataType.INTEGER,
+  },)
+  numberBathrooms!: number
+
+  @Column( {
+    type: DataType.FLOAT,
+  },)
+  squareMeters!:number
+  
+  @Column( {
+    type: DataType.FLOAT,
+  },)
+  rentalPrice!: number
+
+  @Column({
+    type: DataType.TEXT,
+    allowNull: true,
+  },) 
+  status!: string
+
+  @Column( {
+    type: DataType.STRING,
+    allowNull: true,
+  },)
+  foto1!: string
+
+  @Column(
+    {
+      type: DataType.STRING,
+      allowNull: true,
+    },
+  ) 
+  foto2!: string
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+  },) 
+  foto3!: string
+
+  @Column( {
+    type: DataType.STRING,
+    allowNull: true,
+  },)
+  foto4!:string
+  
+  @Column( {
+    type: DataType.STRING,
+    allowNull: true,
+  },)
+  foto5!: string
+
+  @Column({
+    type: DataType.INTEGER,
+  },) 
+  isActive!: number
+}
+ 
 
 
+/*
 Property.hasMany(User,{
     foreignKey: 'IdTenant'
 }),
@@ -105,4 +137,4 @@ Property.hasMany(Rental,{
 }),//listo listo
 Property.hasMany(Review,{
     foreignKey: 'IdProperty'
-})
+})*/

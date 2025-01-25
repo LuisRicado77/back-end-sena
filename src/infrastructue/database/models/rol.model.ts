@@ -1,44 +1,27 @@
-
-import { Model, DataTypes } from "sequelize";
-import { sequelize } from "../sequelize";
-import { User } from "./user.model";
+import { Model, DataType,Sequelize, Table,Column } from "sequelize-typescript";
 
 
-export class Rol extends Model{
+@Table({
+  timestamps:true,
+  tableName: "rols"
+})
+export class Rol extends Model {
+  @Column( {
+    type: DataType.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+    onDelete: "CASCADE", onUpdate: "CASCADE"
+  },)
+  idRol!: number
+
+  @Column( {
+    type: DataType.STRING,
+    allowNull: false,
+  },)
+  name!: string
   
+  @Column({
+    type: DataType.INTEGER,
+  },) 
+  isActive!: number
 }
-
-Rol.init(
-  {
-    idRol:{
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      allowNull:false
-    },
-    name:{
-      type:DataTypes.STRING,
-      allowNull:false
-    },
-    isActive:{
-      type: DataTypes.INTEGER
-  }
-  },
-  {
-    sequelize,
-    modelName: "Rol",
-    tableName: 'rols',
-    timestamps: true,
-    
-  }
-)
-Rol.hasMany(User,{
-  foreignKey: 'IdRol'
-})//listo listo
-
-
-
-
-
-
-
-

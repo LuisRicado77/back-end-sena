@@ -1,36 +1,32 @@
-import { DataTypes, Model } from "sequelize";
-import { sequelize } from "../sequelize";
-import { User } from "./user.model";
-import { Property } from "./property.model";
 
+import { Table,Column, Model,HasMany, DataType } from "sequelize-typescript";
+
+@Table({
+    timestamps: true,
+    tableName: "rentals"
+})
 export class Rental extends Model{
+    @Column({
+        type: DataType.INTEGER,
+        primaryKey: true,
+        allowNull:false,
+        onDelete: "CASCADE", onUpdate: "CASCADE"
+    },)
+    idRental!: number
 
+    @Column({
+        type:DataType.STRING,
+        allowNull:false
+    },)
+    status!: string
+
+    @Column({
+        type: DataType.INTEGER
+    })
+    isActive!: number
 
 }
 
 
-Rental.init(
-    {
-        idRental:{
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            allowNull:false
-        },
-        status:{
-            type:DataTypes.STRING,
-            allowNull:false
-        },
-        isActive:{
-            type: DataTypes.INTEGER
-        }
-    },
-    {
-        sequelize,
-        modelName: "Rental",
-        tableName: 'rentals',
-        timestamps: true
-    }
-)
 
-Rental.belongsTo(User),
-Rental.belongsTo(Property)//listo listo
+
