@@ -1,23 +1,26 @@
-export interface IProperty{
-    id:string,
-    propertyType: string,
-    location:string,
-    city:string,
-    state: string,
-    country:string,
-    zipCode:number,
-    createdAt?: Date,
-    updatedAt?: Date,
-    numberRooms: number,
-    numberBathrooms:number,
-    squareMeters: number,
-    rentalPrice: number,
-    propertyStatus: string
-    description?: string
-    images?:string,
-    ownerId: string
-    active: boolean
-
+export interface IProperty {
+  
+  idProperty: string;
+  title: string,
+  typeProperty: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  zipCode?: number;
+  numberRooms: number;
+  numberBathrooms: number;
+  squareMeters: string;
+  rentalPrice: number;
+  status: string;
+  description?: string;
+  picture1?: string;
+  picture2?: string;
+  picture3?: string;
+  picture4?: string;
+  picture5?: string;
+  isActive?: number
 }
 
-export interface IpropertyCreate extends Omit<IProperty, "id" | "createdAt" | "updateAt">{}
+export interface IpropertyCreate
+  extends Omit<IProperty, "id"> {}

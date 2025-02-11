@@ -1,11 +1,13 @@
+import { string } from "joi";
+
 export interface ILeaseRentalApplication {
-   id:string,
+   idApplication:string,
+   status: string,
+   dateRequest: Date,
    idProperty: string,
    idTenant:string,
-   state: 'Accepted'|'Reject'|'pending',
-   dateRequest: Date,
-   active: boolean
+   isActive: number
 
   }
 
-  export interface ILeaseRentalApplicationCreate extends Omit<ILeaseRentalApplication,"id">{}
+  export interface ILeaseRentalApplicationCreate extends Omit<ILeaseRentalApplication,"idApplication">{}

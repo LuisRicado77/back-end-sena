@@ -1,17 +1,19 @@
-import { DataType, Model, Sequelize , Table,Column, AutoIncrement} from "sequelize-typescript";
-
+import { DataType, Model, Sequelize , Table,Column, AutoIncrement, ForeignKey, BelongsTo, Index} from "sequelize-typescript";
+import { PropertyModel } from './property.model';
+import { UserModel } from "./user.model";
 
 @Table({
     timestamps:true,
     tableName: "reviews"
 })
-export class Review extends Model{
+export class ReviewModel extends Model{
     
     @Column({
         type: DataType.INTEGER,
         primaryKey: true,
         allowNull:false,
-        autoIncrement: true
+        autoIncrement: true,
+        onDelete: "CASCADE", onUpdate: "CASCADE"
     },)
     idReview!: number
 
@@ -30,6 +32,7 @@ export class Review extends Model{
     date!:Date
 
 
+   
     @Column({
         type: DataType.INTEGER,
         allowNull:false
@@ -45,9 +48,28 @@ export class Review extends Model{
 
 
     @Column({
-        type: DataType.INTEGER
+        type: DataType.INTEGER,
+        defaultValue: 1
     })
     isActive!: number
+
+
+    @ForeignKey(() => PropertyModel)
+    @Column
+    idProperty!: number
+
+
+    @ForeignKey(() => UserModel)
+    @Column
+    idLessor!: number
+
+
+    @BelongsTo(() => PropertyModel)
+    property!: PropertyModel
+
+
+    @BelongsTo(() => UserModel)
+    user!:UserModel
 }
 
 

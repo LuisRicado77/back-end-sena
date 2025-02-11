@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.8",
     "@types/sequelize": "^4.28.20",
     "@types/typescript": "^2.0.0",
     "axios": "^1.7.9",
@@ -20,6 +21,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.0",
     "morgan": "^1.10.0",
     "mysql2": "^3.12.0",

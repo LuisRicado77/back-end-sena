@@ -1,25 +1,41 @@
-import { Table,Column, Model,HasMany, DataType } from "sequelize-typescript";
-
+import { Table,Column, Model,HasMany, DataType, HasOne, ForeignKey, BelongsTo, AllowNull } from "sequelize-typescript";
+import { UserModel } from "./user.model";
+import { ContractModel } from "./contract.model";
+import { RentalModel } from "./rental.model";
+import { ReviewModel } from "./review.model";
+import { ApplicationModel } from "./application.model";
 
 @Table({
   tableName: "properties",
   timestamps: true
 })
-export class Property extends Model {
+export class PropertyModel extends Model {
    
   @Column( {
     type: DataType.INTEGER,
     primaryKey: true,
     allowNull: false,
+    autoIncrement: true,
     onDelete: "CASCADE", onUpdate: "CASCADE"
   },)
   idProperty!: number
+
+  @Column({
+    type: DataType.STRING
+  })
+  title!: string
 
   @Column( {
     type: DataType.STRING,
     allowNull: false,
   },)
   typeProperty!: string
+
+  @Column( {
+    type: DataType.STRING,
+    allowNull: true,
+  },)
+  description!: string
 
   @Column( {
     type: DataType.STRING,
@@ -44,14 +60,14 @@ export class Property extends Model {
   @Column(
     {
       type: DataType.STRING,
-      allowNull: false,
+      allowNull: true,
     },
   ) 
   country!: string
 
   @Column( {
     type: DataType.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },)
   zipCode!: number
   
@@ -65,13 +81,14 @@ export class Property extends Model {
   },)
   numberBathrooms!: number
 
-  @Column( {
-    type: DataType.FLOAT,
+  @Column({
+    type: DataType.STRING,
+    allowNull: false
   },)
   squareMeters!:number
   
   @Column( {
-    type: DataType.FLOAT,
+    type: DataType.DECIMAL(15, 4),
   },)
   rentalPrice!: number
 
@@ -85,7 +102,7 @@ export class Property extends Model {
     type: DataType.STRING,
     allowNull: true,
   },)
-  foto1!: string
+  picture1!: string
 
   @Column(
     {
@@ -93,30 +110,53 @@ export class Property extends Model {
       allowNull: true,
     },
   ) 
-  foto2!: string
+  picture2!: string
 
   @Column({
     type: DataType.STRING,
     allowNull: true,
   },) 
-  foto3!: string
+  picture3!: string
 
   @Column( {
     type: DataType.STRING,
     allowNull: true,
   },)
-  foto4!:string
+  picture4!:string
   
   @Column( {
     type: DataType.STRING,
     allowNull: true,
   },)
-  foto5!: string
+  picture5!: string
 
   @Column({
     type: DataType.INTEGER,
+    defaultValue: 1
   },) 
   isActive!: number
+  
+  @ForeignKey(() => UserModel)
+  @Column
+  idTenant!: number
+
+  @BelongsTo(() => UserModel)
+  tenant!: UserModel;   
+
+
+  @HasOne(() => ContractModel, {  onDelete: 'RESTRICT', onUpdate: 'RESTRICT' })
+  contract!: ContractModel;
+
+  
+  @HasMany(() => RentalModel)
+  rentals!: RentalModel[];
+
+  @HasMany(() => ApplicationModel)
+  applications!: RentalModel[];
+
+  
+  @HasMany(() => ReviewModel)
+  reviews!: ReviewModel[];
 }
  
 

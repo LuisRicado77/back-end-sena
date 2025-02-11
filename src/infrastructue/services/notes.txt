@@ -1,0 +1,41 @@
+async sendRequest(
+        leaseRentalApplication: ILeaseRentalApplicationCreate
+    ): Promise<ILeaseRentalApplication> {
+        try {
+            console.log("🚀 Entrando en sendRequest");
+    
+            const { idTenant, idProperty } = leaseRentalApplication;
+            console.log("🔍 Buscando si ya existe una aplicación con:", { idTenant, idProperty });
+    
+            // Verificar si ya existe una solicitud para este tenant y propiedad
+            const existingApplication = await ApplicationModel.findOne({
+                where: { idTenant, idProperty },
+            });
+    
+            console.log("Resultado de findOne:", existingApplication);
+    
+            if (existingApplication) {
+                throw new GetError("the application already exists");
+            }
+    
+            console.log("📝 Creando nueva solicitud");
+            const newApplication = await ApplicationModel.create(leaseRentalApplication);
+            console.log("✅ Nueva solicitud creada:", newApplication);
+    
+            if (!newApplication) {
+                throw new NotCreatedError("No se pudo crear la solicitud.");
+            }
+    
+            return {
+                idApplication: newApplication.idApplication.toString(),
+                status: newApplication.status,
+                dateRequest: newApplication.dateRequest,
+                idProperty: newApplication.idProperty.toString(),
+                idTenant: newApplication.idTenant.toString(),
+                isActive: newApplication.isActive,
+            };
+        } catch (error) {
+            console.error("🔥 Error en sendRequest:", error);
+            throw new NotCreatedError("Could not send the Application");
+        }
+    }

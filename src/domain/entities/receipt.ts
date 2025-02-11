@@ -1,4 +1,4 @@
-
+  
 class receipt{
     private idReceipt: number
     private issueDate: Date

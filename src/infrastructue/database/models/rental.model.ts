@@ -1,11 +1,12 @@
 
-import { Table,Column, Model,HasMany, DataType } from "sequelize-typescript";
-
+import { Table,Column, Model,HasMany, DataType, BelongsTo, ForeignKey } from "sequelize-typescript";
+import { PropertyModel } from "./property.model";
+import { UserModel } from "./user.model";
 @Table({
     timestamps: true,
     tableName: "rentals"
 })
-export class Rental extends Model{
+export class RentalModel extends Model{
     @Column({
         type: DataType.INTEGER,
         primaryKey: true,
@@ -21,9 +22,26 @@ export class Rental extends Model{
     status!: string
 
     @Column({
-        type: DataType.INTEGER
+        type: DataType.INTEGER,
+        defaultValue: 1
     })
     isActive!: number
+
+    @ForeignKey(() => PropertyModel)
+    @Column
+    idProperty!: number
+
+    @ForeignKey(() => UserModel)
+    @Column
+    idLessor!: number
+
+
+    @BelongsTo(() => PropertyModel)
+    property!: PropertyModel
+
+
+    @BelongsTo(() => UserModel)
+    user!:UserModel
 
 }
 

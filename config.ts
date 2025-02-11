@@ -14,6 +14,7 @@ function getEnvVariable(key: string): string {
 export const PAYPAL_API_CLIENT = getEnvVariable("PAYPAL_API_CLIENT");
 export const PAYPAL_API_SECRET = getEnvVariable("PAYPAL_API_SECRET");
 export const PAYPAL_API = getEnvVariable("PAYPAL_API"); // url sandbox or live for your app
+export const JWT_SECRET = getEnvVariable("JWT_SECRET")
 
 // Server
 export const PORT = process.env.PORT || 3000;

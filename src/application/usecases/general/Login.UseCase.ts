@@ -1,25 +1,53 @@
 import { AuthenticationError } from "../../../domain/errors/AuthenticationError ";
 import { GetError } from "../../../domain/errors/GetError";
 import { IUserService } from "../../../domain/services/IUser.interface";
+import { InvalidCredentialError } from "../../../domain/errors/InvalidCredentialsError";
+import { ITokenService } from "../../../domain/services/IToken.service";
 
+export class LoginUseCase {
+  constructor(
+    private readonly userSrv: IUserService,
+    private readonly tokenService: ITokenService
+  ) {}
 
+  async execute({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }): Promise<{ token: string; idRol?: number }> {
+    try {
+      const existingUser = await this.userSrv.findByEmail(email);
 
-export class LoginUseCase{
-    constructor(private readonly userSrv: IUserService){}
+      if (!existingUser) {
+        throw new GetError("Could not find the user");
 
+      }
+      console.log(existingUser)
 
-    async execute(password: string, email: string):Promise<void>{
+      const isPasswordValid = await this.userSrv.verifyPassword(password);
 
-        try {
+      if (!isPasswordValid) {
+        throw new InvalidCredentialError("Invalid email or password");
+      }
+      const payload = {
+        idUser: existingUser.idUser,
+        email: existingUser.email,
+        names: existingUser.names,
+      };
+      const idRol = existingUser.idRol;
 
-            const existingUser = await this.userSrv.findByEmail(email);
+      if (!idRol) {
+        throw new GetError("User role ID (idRol) was not found in the database");
+      }
 
-            if(!existingUser){throw new GetError("Could not find the user")}
+      const token = await this.tokenService.generateToken(payload);
+      console.log(idRol, existingUser.email, isPasswordValid)
 
-            this.userSrv.verifyPassword(password,existingUser);
-            
-        } catch (error) {
-            throw new AuthenticationError("The password y email are incorrect");
-        }
+      return { token, idRol };
+    } catch (error) {
+      throw new AuthenticationError("The password y email are incorrect");
     }
+  }
 }

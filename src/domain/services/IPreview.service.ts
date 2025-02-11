@@ -4,5 +4,5 @@ export interface IPreviewService{
     updateReview:(id: IReview['id'], review: IReview) => Promise<IReview>,
     deleteReview:(id: IReview['id']) => Promise<void>
     getReviewById:(id: IReview['id']) =>Promise<IReview>
-    getAllReviews:()=> Promise<IReview[]>
+    getAllReviews:() => Promise<IReview[]>
 }

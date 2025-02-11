@@ -7,18 +7,10 @@ import { FindPropertyUseCase } from './FindProperty.UseCase';
 
 export class DeletePropertyUseCase{
     constructor(private readonly propertySrv: IPropertyService){
-
     }
-
     async execute(id:string):Promise<void>{
          try {
-           const property =  await this.propertySrv.getPropertyById(id)
-           if(!property){
-            throw new NotFoundError("Property no found")
-           }
-
-           property.active = false
-           await this.propertySrv.updateProperty(property.id,property)
+           await this.propertySrv.deleteProperty(id)
          } catch (error) {
             throw error || new DeleteError("Could not Delete")
          }

@@ -1,5 +1,5 @@
 export interface IReview{
-    id:string,
+    id:number,
     reviewBody: string,
     calification: string,
     dateAndTime: Date,

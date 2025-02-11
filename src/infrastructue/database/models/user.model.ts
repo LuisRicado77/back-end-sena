@@ -1,82 +1,120 @@
-
-import { Table,Column, Model,HasMany, DataType } from "sequelize-typescript";
-import { Rol } from "./rol.model";
-import { Review } from "./review.model";
-import { Receipt } from "./receipt.model";
-import { Contract } from "./contract.model";
-import { Payment } from "./payment.model";
-import { Property } from "./property.model";
-import { Rental } from "./rental.model";
-import { Col } from "sequelize/types/utils";
+import {
+  Table,
+  Column,
+  Model,
+  HasMany,
+  DataType,
+  ForeignKey,
+  BelongsTo,
+  HasOne,
+  Index,
+} from "sequelize-typescript";
+import { RolModel } from "./rol.model";
+import { ReviewModel } from "./review.model";
+import { ReceiptModel } from "./receipt.model";
+import { ContractModel } from "./contract.model";
+import { PaymentModel } from "./payment.model";
+import { PropertyModel } from "./property.model";
+import { RentalModel } from "./rental.model";
+import { ApplicationModel } from "./application.model";
 
 
 @Table({
   tableName: "users",
-  timestamps: true
+  timestamps: true,
 })
-export class User extends Model {
+export class UserModel extends Model {
   @Column({
     type: DataType.INTEGER,
     primaryKey: true,
     autoIncrement: true,
-    onDelete: "CASCADE", onUpdate: "CASCADE"
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
   })
   idUser!: number;
 
-
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   })
-  name!:string;
+  names!: string;
 
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   })
   lastNames!: string;
 
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   })
   password!: string;
 
-   @Column({
+  @Column({
     type: DataType.STRING,
-    allowNull: false
-   })
-   email!: string;
+    allowNull: false,
+  })
+  email!: string;
 
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   })
   phone!: string;
 
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   })
-  address!:string;
+  address!: string;
 
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   })
   city!: string;
 
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   })
-  estate!: string;
+  state!: string;
 
   @Column({
     type: DataType.INTEGER,
-  },) 
-  isActive!: number
-  
+    defaultValue: 1,
+  })
+  isActive!: number;
+
+  @ForeignKey(() => RolModel) // Define la clave foránea
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  idRol!: number;
+
+  @BelongsTo(() => RolModel)
+  rol!: RolModel;
+
+  @HasMany(() => PropertyModel)
+  rentedProperties!: PropertyModel[];
+
+  @HasMany(() => PaymentModel)
+  payments!: PaymentModel[];
+
+  @HasMany(() => ContractModel)
+  contracts!: ContractModel[];
+
+  @HasMany(() => ReceiptModel)
+  receipts!: ReceiptModel[];
+
+  @HasMany(() => RentalModel)
+  rentals!: RentalModel[];
+
+  @HasMany(() => ApplicationModel)
+  applications!: RentalModel[];
+
+  @HasMany(() => ReviewModel)
+  reviews!: ReviewModel[];
 }
-
-

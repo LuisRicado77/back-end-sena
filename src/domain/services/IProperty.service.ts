@@ -2,8 +2,8 @@ import { IpropertyCreate, IProperty } from '../interfaces/IProperty.interface';
 
 export interface IPropertyService{
     createProperty:(property: IpropertyCreate) => Promise<IProperty>
-    updateProperty:(id: IProperty['id'],property:IProperty) => Promise<IProperty>
-    getPropertyById:(id: IProperty['id']) => Promise<IProperty>
+    updateProperty:(id: IProperty['idProperty'],property:IProperty) => Promise<IProperty>
+    getPropertyById:(id: IProperty['idProperty']) => Promise<IProperty>
     getAllProperty:() => Promise<IProperty[]>
-    deleteProperty:(id: IProperty['id']) => Promise<void>
+    deleteProperty:(id: IProperty['idProperty']) => Promise<void>
 }

@@ -9,7 +9,7 @@ export class FindActivesContractsUseCase{
 
     }
 
-    async findActivesContracts(id:string){
+    async findActivesContracts(id:number){
         try {
             const contract = await this.contractSrv.getActivesContracts(id);
             return contract;

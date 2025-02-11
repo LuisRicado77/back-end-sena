@@ -1,5 +1,5 @@
 export interface IContract {
-    id: string,
+    id: number,
     startDate: Date,
     endDate: Date,
     client: string,

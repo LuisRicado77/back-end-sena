@@ -9,16 +9,18 @@ export class RegisterUseCase{
 
     constructor(private readonly userSrv: IUserService){}
 
-    async execute(user: IUserCreate):Promise<void>{
+    async execute(user: IUserCreate):Promise<IUser>{
         try{
-            const userExisting = await this.userSrv.findByEmail(user.email);
-            if(!userExisting){
-                throw new GetError("Could not find the user")
+          
+            const newUser = await this.userSrv.registerUser(user);
+            if(!newUser){
+                throw new  NotCreatedError( "Could not create the user")
             }
-            const newUser = await this.userSrv.registerUser(user)
+            return newUser;
         }catch{
             throw new NotCreatedError( "Could not create the user")
         }
         
     }
+    
 }

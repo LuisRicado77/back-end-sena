@@ -1,10 +1,16 @@
 import { ILeaseRentalApplication, ILeaseRentalApplicationCreate } from '../interfaces/ILeaseRentalApplication';
 
-export interface ILeaseRentalApplicationService {   
-    execute(idSolicitud: string, accion: 'accept' | 'reject'): Promise<void>;
-    findById(id:ILeaseRentalApplication['id']):Promise<ILeaseRentalApplication>
-    update(id:ILeaseRentalApplication['id'],leaseRentalApplication: ILeaseRentalApplication):Promise<void>
-    sendRedquest(leaseRentalApplication: ILeaseRentalApplicationCreate):Promise<boolean>;
+export interface ILeaseRentalApplicationService {  
+
+
+    resposeRequest(idApplication: ILeaseRentalApplication['idApplication'], accion: { status: string }): Promise<void>;
+    findById(id:ILeaseRentalApplication['idApplication']):Promise<ILeaseRentalApplication>
+    update(id:ILeaseRentalApplication['idApplication'],leaseRentalApplication: ILeaseRentalApplication):Promise<ILeaseRentalApplication>
+    sendRequest(leaseRentalApplication: ILeaseRentalApplicationCreate):Promise<ILeaseRentalApplication>;
+    getAllApplications():Promise<ILeaseRentalApplication[]>;
+    cancelRequest(idApplication: ILeaseRentalApplication['idApplication']):Promise<void>;
+
     
+
   }
   

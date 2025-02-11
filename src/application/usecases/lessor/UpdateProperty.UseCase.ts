@@ -8,7 +8,7 @@ export class UpdatePropertyUseCase{
     constructor(private readonly propertySrv: IPropertyService){
 
     }
-    async execute(id:string, property:IProperty): Promise<void>{
+    async execute(id:string, property:IProperty): Promise<IProperty>{
         
         try {
 
@@ -17,7 +17,8 @@ export class UpdatePropertyUseCase{
             
         if(!existingProperty){throw new UpdateError("The property wasn't find")};
 
-          property = await this.propertySrv.updateProperty(id,property);
+          const propertyUpdate = await this.propertySrv.updateProperty(id,property);
+          return propertyUpdate;
 
         }catch(error){
             throw error || new UpdateError("Could not update with success"); 

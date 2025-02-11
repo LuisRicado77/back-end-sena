@@ -8,9 +8,10 @@ export class FindPropertyUseCase{
 
     }
 
-   async find(id:string){
+   async execute(id:string){
         try {
             const property = await this.propertySrv.getPropertyById(id)
+            return property;
         } catch (error) {
             throw new GetError("No found it");
         }
