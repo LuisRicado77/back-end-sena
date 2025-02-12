@@ -2,7 +2,7 @@ export interface IReview{
     idReview:string,
     content: string,
     rating: number,
-    dateAndTime: Date,
+    date: Date,
     nameUser: string,
     namePropertyCheck: string,
     status: string,

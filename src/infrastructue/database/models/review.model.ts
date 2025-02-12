@@ -3,7 +3,7 @@ import { PropertyModel } from './property.model';
 import { UserModel } from "./user.model";
 
 @Table({
-    timestamps:true,
+    timestamps:false,
     tableName: "reviews"
 })
 export class ReviewModel extends Model{

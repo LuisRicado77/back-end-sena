@@ -8,27 +8,35 @@ import {
   IReview,
 } from "../../domain/interfaces/IReview.interface";
 import { IReviewService } from "../../domain/services/IReview.service";
+import { PropertyModel } from "../database/models/property.model";
 import { ReviewModel } from "../database/models/review.model";
+import { UserModel } from "../database/models/user.model";
 
 export class ReviewService implements IReviewService {
   async createReview(review: IReviewCreate): Promise<IReview> {
     try {
+      console.log(review.status)
+      console.log(review.date)
       console.log("creating a review");
+
       const reviewCreated = await ReviewModel.create(review);
       console.log("review posted", reviewCreated);
+      
       if (!reviewCreated) {
         throw new Error("Error at creating");
       }
+
       const reviewFormatted: IReview = {
         idReview: reviewCreated.idReview.toString(),
         content: reviewCreated.content,
         rating: reviewCreated.rating,
-        dateAndTime: reviewCreated.date,
+        date: reviewCreated.date,
         nameUser: reviewCreated.user?.names || "user unknown",
         namePropertyCheck: reviewCreated.property?.title || "property unknown",
         status: reviewCreated.status,
         isActive: reviewCreated.isActive,
       };
+      console.log(reviewFormatted)
       return reviewFormatted;
     } catch (error) {
       console.log(error);
@@ -52,7 +60,7 @@ export class ReviewService implements IReviewService {
         idReview: reviewFound.idReview.toString(),
         content: reviewFound.content,
         rating: reviewFound.rating,
-        dateAndTime: reviewFound.date,
+        date: reviewFound.date,
         nameUser: reviewFound.user?.names || "user unknown",
         namePropertyCheck: reviewFound.property?.title || "property unknown",
         status: reviewFound.status,
@@ -96,7 +104,7 @@ export class ReviewService implements IReviewService {
             idReview: reviewFound.idReview.toString(),
             content: reviewFound.content,
             rating: reviewFound.rating,
-            dateAndTime: reviewFound.date,
+            date: reviewFound.date,
             nameUser: reviewFound.user?.names || "user unknown",
             namePropertyCheck: reviewFound.property?.title || "property unknown",
             status: reviewFound.status,
@@ -112,7 +120,9 @@ export class ReviewService implements IReviewService {
   }
   async getAllReviewsInaProperty(idProperty: IProperty['idProperty']): Promise<IReview[]> {
     try {
-      const reviews : ReviewModel[] = await ReviewModel.findAll({where:{isActive:1,idProperty: idProperty}})
+
+      const reviews : ReviewModel[] = await ReviewModel.findAll({where:{isActive:1,idProperty: idProperty},
+      include:[ { model: UserModel, attributes: ['names'] },{ model: PropertyModel, attributes: ['title'] }]})
       if(!reviews || reviews.length === 0){
         throw new GetError("Could not get with success")
       }
@@ -120,11 +130,10 @@ export class ReviewService implements IReviewService {
         idReview: review.idReview.toString(),
         content: review.content,
         rating: review.rating,
-        dateAndTime: review.date,
-        nameUser: review.user?.names,
-        namePropertyCheck: review.property?.title,
+        date: review.date,
+        nameUser: review.user?.names || "user unknown",
+        namePropertyCheck: review.property?.title || "porperty unknown",
         status:review.status
-
 
       }))
       return formattedReviews
