@@ -39,7 +39,7 @@ export class PropertyModel extends Model {
 
   @Column( {
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   },)
   address!: string
 
@@ -83,7 +83,7 @@ export class PropertyModel extends Model {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: true
   },)
   squareMeters!:number
   

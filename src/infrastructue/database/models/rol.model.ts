@@ -2,7 +2,7 @@ import { Model, DataType,Sequelize, Table,Column, HasMany, AutoIncrement } from 
 import { UserModel } from "./user.model";
 
 @Table({
-  timestamps:true,
+  timestamps: false,
   tableName: "rols"
 })
 export class RolModel extends Model {

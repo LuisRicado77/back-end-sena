@@ -1,12 +1,12 @@
 export interface IReview{
-    id:number,
-    reviewBody: string,
-    calification: string,
+    idReview:string,
+    content: string,
+    rating: number,
     dateAndTime: Date,
     nameUser: string,
     namePropertyCheck: string,
     status: string,
-    active: boolean
+    isActive?: number
 
 }
 

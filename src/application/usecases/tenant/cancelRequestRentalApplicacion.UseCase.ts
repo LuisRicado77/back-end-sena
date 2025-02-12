@@ -6,9 +6,7 @@ constructor(private readonly applicationSrv: ILeaseRentalApplicationService){}
 
 async execute(idApplication:string){
     try {
-        const applicationCanceled = await this.applicationSrv.cancelRequest(idApplication
-
-        )
+        const applicationCanceled = await this.applicationSrv.cancelRequest(idApplication)
     } catch (error) {
         console.log(error)
         throw new Error("");

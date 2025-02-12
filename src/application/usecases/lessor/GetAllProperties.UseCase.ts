@@ -1,6 +1,6 @@
 import { GetError } from "../../../domain/errors/GetError";
 import { IProperty } from "../../../domain/interfaces/IProperty.interface";
-import { IPreviewService } from "../../../domain/services/IPreview.service";
+
 import { IPropertyService } from '../../../domain/services/IProperty.service';
 import { PropertyService } from '../../../infrastructue/services/Property.service';
 

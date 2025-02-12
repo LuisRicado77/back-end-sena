@@ -141,7 +141,7 @@ export class ApplicationService implements ILeaseRentalApplicationService {
             return formattedApplications
         } catch (error) {
             console.log(error)
-            throw new GetError("");
+            throw new GetError("Could not get with success");
 
         }
     }
@@ -156,7 +156,7 @@ export class ApplicationService implements ILeaseRentalApplicationService {
             }
             const [rowsUpdate] = await ApplicationModel.update({ isActive: 0 }, { where: { idApplication: idApplication } })
             if (rowsUpdate === 0) {
-                throw new DeleteError("");
+                throw new UpdateError("Could  not udáte woth success");
 
             }
         } catch (error) {
