@@ -4,7 +4,7 @@ import { RequestRentalApplicationUseCase } from "../../../application/usecases/t
 import { RejectOrAcceptRentalApplicationUseCase } from "../../../application/usecases/lessor/RejectOrAcceptRentalApplication";
 import { ResponseAdapter } from "../responseAdapter";
 import { schemaValidator } from "../../middlewares/shema.middleware";
-import { applicationSchemaCreate, applicationSchemaUpdate } from "../../schemas/application.shema";
+import { applicationSchemaCreate, applicationSchemaUpdate } from "../../schemas/application.schema";
 import { GetAllApplicationsUseCase } from "../../../application/usecases/lessor/GetAllApplications.UseCase";
 import { GetApplicationUseCase } from "../../../application/usecases/lessor/GetApplication.UseCase";
 import { GetError } from "../../../domain/errors/GetError";

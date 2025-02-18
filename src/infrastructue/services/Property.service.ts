@@ -8,6 +8,7 @@ import {
 } from "../../domain/interfaces/IProperty.interface";
 import { IPropertyService } from "../../domain/services/IProperty.service";
 import { PropertyModel } from "../database/models/property.model";
+import { UserModel } from "../database/models/user.model";
 
 export class PropertyService implements IPropertyService {
 
@@ -45,11 +46,9 @@ export class PropertyService implements IPropertyService {
             rentalPrice: propertyCreated.rentalPrice,
             status: propertyCreated.status,
             description: propertyCreated.description,
-            picture1: propertyCreated.picture1,
-            picture2: propertyCreated.picture2,
-            picture3: propertyCreated.picture3,
-            picture4: propertyCreated.picture4,
-            picture5: propertyCreated.picture5,
+            images: propertyCreated.images,
+            nameLessor: propertyCreated.Lessor?.names,
+            lastNamesLessor: propertyCreated.Lessor?.lastNames,
             isActive: propertyCreated.isActive
 
           };
@@ -68,7 +67,7 @@ export class PropertyService implements IPropertyService {
             console.log("Ejecutando update en infraestructura");
     
             // Buscar el usuario por ID
-            const propertyExisted = await PropertyModel.findByPk(id);
+            const propertyExisted = await PropertyModel.findByPk();
             if (!propertyExisted) {
                 throw new GetError("No se encontró el usuario para actualizar.");
             }
@@ -92,11 +91,9 @@ export class PropertyService implements IPropertyService {
                 rentalPrice: propertyExisted.rentalPrice,
                 status: propertyExisted.status,
                 description: propertyExisted.description,
-                picture1: propertyExisted.picture1,
-                picture2: propertyExisted.picture2,
-                picture3: propertyExisted.picture3,
-                picture4: propertyExisted.picture4,
-                picture5: propertyExisted.picture5,
+                images: propertyExisted.images,
+                nameLessor: propertyExisted.Lessor?.names,
+               lastNamesLessor: propertyExisted.Lessor?.lastNames,
                 isActive: propertyExisted.isActive
     
               };
@@ -109,7 +106,8 @@ export class PropertyService implements IPropertyService {
   }
   async getPropertyById(id: IProperty["idProperty"]): Promise<IProperty> {
     try {
-          const property = await PropertyModel.findOne({where:{idProperty:id,isActive:1}});
+          const property = await PropertyModel.findOne({where:{idProperty:id,isActive:1},
+          include:[{model:UserModel, attributes:['names','lastNames']}]});
           if (!property) {
             throw new GetError("Could no found the user");
           }
@@ -129,13 +127,10 @@ export class PropertyService implements IPropertyService {
             rentalPrice: property.rentalPrice,
             status: property.status,
             description: property.description,
-            picture1: property.picture1,
-            picture2: property.picture2,
-            picture3: property.picture3,
-            picture4: property.picture4,
-            picture5: property.picture5,
-            isActive: property.isActive
-
+            images: property.images,
+            isActive: property.isActive,
+            nameLessor: property.Lessor?.names,
+            lastNamesLessor: property.Lessor?.lastNames
           };
     
           return newProperty;
@@ -146,13 +141,19 @@ export class PropertyService implements IPropertyService {
   }
   async getAllProperty(): Promise<IProperty[]> {
     try {
-          const users: PropertyModel[] = await PropertyModel.findAll({where:{isActive:1}});
+
+        console.log("Buscando usuarios")
+          const properties: PropertyModel[] = await PropertyModel.findAll({where:{isActive:1},
+            include:[{model:UserModel, attributes:['names','lastNames']}]});
     
-          if (!users || users.length === 0) {
+          if (!properties || properties.length === 0) {
+            console.log("usuarios no encontrados")
             throw new GetError("Could not find users");
           }
+
+          console.log("Usuarios hallados",properties);
     
-          const formattedProperties: IProperty[] = users.map((property) => ({
+          const formattedProperties: IProperty[] = properties.map((property) => ({
             idProperty: property.idProperty.toString(),
             title: property.title,
             typeProperty: property.typeProperty,
@@ -163,19 +164,20 @@ export class PropertyService implements IPropertyService {
             zipCode: property.zipCode,
             numberRooms: property.numberRooms,
             numberBathrooms: property.numberBathrooms,
-            squareMeters: property.squareMeters.toString(),
+            squareMeters: property.squareMeters?.toString(),
             rentalPrice: property.rentalPrice,
             status: property.status,
             description: property.description,
-            picture1: property.picture1,
-            picture2: property.picture2,
-            picture3: property.picture3,
-            picture4: property.picture4,
-            picture5: property.picture5,
+            nameLessor: property.Lessor?.names,
+            lastNamesLessor: property.Lessor?.lastNames,
+            images: property.images,
             isActive: property.isActive
           }));
+          console.log(formattedProperties);
           return formattedProperties;
         } catch (error) {
+          console.log(error)
+          
           throw new Error("Could not find users");
         }
   }
@@ -203,4 +205,5 @@ export class PropertyService implements IPropertyService {
         
     }
   }
+  
 }

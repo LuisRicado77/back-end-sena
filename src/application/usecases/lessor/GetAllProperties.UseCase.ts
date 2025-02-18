@@ -12,9 +12,11 @@ export class GetAllProperties{
         try {
             
             const properties : IProperty[] = await this.PropertySrv.getAllProperty();
+            console.log(properties);
             return properties;
 
         } catch (error) {
+            console.log(error)
             throw new GetError("Could no found it");
             
         }

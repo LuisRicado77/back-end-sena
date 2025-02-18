@@ -1,4 +1,5 @@
 export interface IProperty {
+
   
   idProperty: string;
   title: string,
@@ -14,12 +15,11 @@ export interface IProperty {
   rentalPrice: number;
   status: string;
   description?: string;
-  picture1?: string;
-  picture2?: string;
-  picture3?: string;
-  picture4?: string;
-  picture5?: string;
-  isActive?: number
+  nameLessor: string,
+  lastNamesLessor:string,
+  images?:string,
+  isActive?:number
+
 }
 
 export interface IpropertyCreate

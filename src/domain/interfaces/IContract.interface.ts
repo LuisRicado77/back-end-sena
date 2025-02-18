@@ -2,8 +2,9 @@ export interface IContract {
     id: string,
     startDate: Date,
     endDate: Date,
-    client: string,
-    property: string,
+    tenantName: string,
+    tenantLastName:string,
+    propertyTitle: string,
     contractType: string,
     contratAmount: number,
     contractStatus: string, //cancel, living, waiting

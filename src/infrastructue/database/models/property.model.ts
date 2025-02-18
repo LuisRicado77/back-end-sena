@@ -1,9 +1,10 @@
-import { Table,Column, Model,HasMany, DataType, HasOne, ForeignKey, BelongsTo, AllowNull } from "sequelize-typescript";
+import { Table,Column, Model,HasMany, DataType, HasOne, ForeignKey, BelongsTo, AllowNull, BelongsToMany } from "sequelize-typescript";
 import { UserModel } from "./user.model";
 import { ContractModel } from "./contract.model";
 import { RentalModel } from "./rental.model";
 import { ReviewModel } from "./review.model";
 import { ApplicationModel } from "./application.model";
+import { FavoritesModel } from "./favorites.model";
 
 @Table({
   tableName: "properties",
@@ -102,33 +103,9 @@ export class PropertyModel extends Model {
     type: DataType.STRING,
     allowNull: true,
   },)
-  picture1!: string
+  images!: string
 
-  @Column(
-    {
-      type: DataType.STRING,
-      allowNull: true,
-    },
-  ) 
-  picture2!: string
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: true,
-  },) 
-  picture3!: string
-
-  @Column( {
-    type: DataType.STRING,
-    allowNull: true,
-  },)
-  picture4!:string
-  
-  @Column( {
-    type: DataType.STRING,
-    allowNull: true,
-  },)
-  picture5!: string
+ 
 
   @Column({
     type: DataType.INTEGER,
@@ -138,10 +115,10 @@ export class PropertyModel extends Model {
   
   @ForeignKey(() => UserModel)
   @Column
-  idTenant!: number
+  idLessor!: number
 
   @BelongsTo(() => UserModel)
-  tenant!: UserModel;   
+  Lessor!: UserModel;   
 
 
   @HasOne(() => ContractModel, {  onDelete: 'RESTRICT', onUpdate: 'RESTRICT' })
@@ -157,24 +134,10 @@ export class PropertyModel extends Model {
   
   @HasMany(() => ReviewModel)
   reviews!: ReviewModel[];
+
+  @BelongsToMany(() => UserModel, () => FavoritesModel)
+  users!:User[];
 }
  
 
 
-/*
-Property.hasMany(User,{
-    foreignKey: 'IdTenant'
-}),
-Property.hasOne(Contract,{
-    onDelete: 'RESTRICT',
-    onUpdate: 'RESTRICT',
-    foreignKey: 'IdProperty'
-});
-
-
-Property.hasMany(Rental,{
-    foreignKey: 'IdProperty'
-}),//listo listo
-Property.hasMany(Review,{
-    foreignKey: 'IdProperty'
-})*/

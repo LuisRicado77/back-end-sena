@@ -8,6 +8,7 @@ import {
   BelongsTo,
   HasOne,
   Index,
+  BelongsToMany,
 } from "sequelize-typescript";
 import { RolModel } from "./rol.model";
 import { ReviewModel } from "./review.model";
@@ -17,6 +18,7 @@ import { PaymentModel } from "./payment.model";
 import { PropertyModel } from "./property.model";
 import { RentalModel } from "./rental.model";
 import { ApplicationModel } from "./application.model";
+import { FavoritesModel } from "./favorites.model";
 
 
 @Table({
@@ -117,4 +119,7 @@ export class UserModel extends Model {
 
   @HasMany(() => ReviewModel)
   reviews!: ReviewModel[];
+  
+  @BelongsToMany(() =>PropertyModel,() => FavoritesModel)
+  properties!:PropertyModel[];
 }

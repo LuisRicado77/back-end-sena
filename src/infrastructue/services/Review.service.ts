@@ -12,6 +12,8 @@ import { PropertyModel } from "../database/models/property.model";
 import { ReviewModel } from "../database/models/review.model";
 import { UserModel } from "../database/models/user.model";
 
+
+
 export class ReviewService implements IReviewService {
   async createReview(review: IReviewCreate): Promise<IReview> {
     try {

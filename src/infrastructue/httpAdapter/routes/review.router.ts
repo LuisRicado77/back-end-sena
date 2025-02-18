@@ -1,6 +1,6 @@
 import { Router,Response,Request } from "express";
 import { schemaValidator } from "../../middlewares/shema.middleware";
-import { reviewSchemaCreate, reviewSchemaUpdate } from "../../schemas/review.shema";
+import { reviewSchemaCreate, reviewSchemaUpdate } from "../../schemas/review.schema";
 import { ResponseAdapter } from "../responseAdapter";
 import { RatePropertyUseCase } from "../../../application/usecases/tenant/RateProperty.UseCase";
 import { ReviewService } from "../../services/Review.service";
