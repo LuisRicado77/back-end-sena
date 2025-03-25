@@ -1,6 +1,8 @@
+import { where } from "sequelize";
+import { DeleteError } from "../../domain/errors/DeleteError";
 import { GetError } from "../../domain/errors/GetError";
 import { NotCreatedError } from "../../domain/errors/NotCreatedError";
-import { IFavoriteCreate, IFavorite } from "../../domain/interfaces/Favorite.interface";
+import { IFavoriteCreate, IFavorite } from "../../domain/interfaces/IFavorite.interface";
 import { IUser } from "../../domain/interfaces/IUser.interface";
 import { IFavoriteService } from "../../domain/services/IFavorite.service";
 import { FavoritesModel } from "../database/models/favorites.model";
@@ -9,6 +11,32 @@ import { UserModel } from "../database/models/user.model";
 
 
 export class FavoriteService implements IFavoriteService{
+    
+    async deleteFavorite(id: IFavorite["idFavorite"]): Promise<void> {
+        try {
+            const favoriteFound = await FavoritesModel.findByPk(id);
+
+
+            if(!favoriteFound){
+                console.log("favorite not found")
+                throw new GetError("");
+                
+            }
+
+
+            const favoriteDeleted = await FavoritesModel.update({isActive:0},{where:{idFavorite:id}})
+
+            if(!favoriteDeleted){
+                throw new DeleteError("Could not delete with success");
+                
+            }
+
+        } catch (error) {
+            console.log(error)
+            throw new DeleteError("Could not delete with success");
+            
+        }
+    }
     async createFavorite(newFavorite: IFavoriteCreate): Promise<IFavorite> {
         try {
             const newItem = await FavoritesModel.create(newFavorite);

@@ -15,12 +15,13 @@ export interface IProperty {
   rentalPrice: number;
   status: string;
   description?: string;
-  nameLessor: string,
-  lastNamesLessor:string,
+  idLessor?: number;
+  nameLessor?: string,
+  lastNamesLessor?:string,
   images?:string,
   isActive?:number
 
 }
 
-export interface IpropertyCreate
-  extends Omit<IProperty, "id"> {}
+export interface IPropertyCreate
+  extends Omit<IProperty, "idProperty"> {}

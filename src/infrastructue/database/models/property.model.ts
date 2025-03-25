@@ -89,7 +89,7 @@ export class PropertyModel extends Model {
   squareMeters!:number
   
   @Column( {
-    type: DataType.DECIMAL(15, 4),
+    type: DataType.DECIMAL(15, 2),
   },)
   rentalPrice!: number
 
@@ -136,7 +136,7 @@ export class PropertyModel extends Model {
   reviews!: ReviewModel[];
 
   @BelongsToMany(() => UserModel, () => FavoritesModel)
-  users!:User[];
+  users!:UserModel[];
 }
  
 

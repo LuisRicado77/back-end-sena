@@ -17,6 +17,9 @@ import { UpdatePropertyUseCase } from "../../../application/usecases/lessor/Upda
 import { FindPropertyUseCase } from "../../../application/usecases/lessor/FindProperty.UseCase";
 import { DeletePropertyUseCase } from "../../../application/usecases/lessor/DeleteProperty.UseCase";
 import { GetAllProperties } from "../../../application/usecases/lessor/GetAllProperties.UseCase";
+import { GetError } from "../../../domain/errors/GetError";
+import { GetAllFavoritesPropertiesByTenant } from "../../../application/usecases/tenant/GetAllFavoritesPropertiesByUser.UseCase";
+import { getAllPropertiesCreatedByLessor } from "../../../application/usecases/lessor/GetAllPropertiesByLessor";
 
 const propertyService = new PropertyService();
 const jwtTokenService = new JwtTokenService();
@@ -26,6 +29,8 @@ const updatePropertyUseCase = new UpdatePropertyUseCase(propertyService);
 const findPropertyUseCase = new FindPropertyUseCase(propertyService);
 const deletePropertyUseCase = new DeletePropertyUseCase(propertyService);
 const getAllPropertiesUseCase = new GetAllProperties(propertyService);
+const getAllPropertiesByLessor  = new getAllPropertiesCreatedByLessor(propertyService);
+
 
 const propertyRouter = Router();
 
@@ -58,7 +63,8 @@ propertyRouter.patch(
   }
 );
 
-//getUserById
+
+//getByid
 propertyRouter.get("/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -71,15 +77,24 @@ propertyRouter.get("/:id", async (req: Request, res: Response) => {
 
 
 
-
-
-//getAllUser
+//getAllProperties
 propertyRouter.get("/", async (req: Request, res: Response)=>{
     try {
         ResponseAdapter.handler(getAllPropertiesUseCase.execute(),req,res);
     } catch (error) {
         throw new NotFoundError();
     }
+})
+
+
+//getAllPropertiesCreatedByLessor
+propertyRouter.get("/lessor/:id", async (req:Request, res:Response) =>{
+  try {
+    const { id } = req.params;
+   ResponseAdapter.handler(getAllPropertiesByLessor.execute(id),req,res);
+  } catch (error) {
+    throw new GetError("Could not get with success");
+  }
 })
 
 

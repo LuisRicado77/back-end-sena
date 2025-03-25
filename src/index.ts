@@ -13,6 +13,8 @@ import sequelize from "./infrastructue/database/sequelize";
 import { propertyRouter } from "./infrastructue/httpAdapter/routes/property.router";
 import applicationRouter from "./infrastructue/httpAdapter/routes/application.router";
 import reviewRouter from "./infrastructue/httpAdapter/routes/review.router";
+import favoriteRouter from "./infrastructue/httpAdapter/routes/favorite.router";
+import imageStorageRouter from "./infrastructue/httpAdapter/routes/imageStorage.router";
 
 
 
@@ -23,12 +25,16 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+app.use("/users",userRouter);
+app.use("/properties",propertyRouter);
+app.use("/applications",applicationRouter);
+app.use("/reviews",reviewRouter);
+app.use("/favorites",favoriteRouter);
+app.use("/upload", imageStorageRouter);
 
 
-app.use("/users",userRouter)
-app.use("/properties",propertyRouter)
-app.use("/applications",applicationRouter)
-app.use("/reviews",reviewRouter)
+
 //call modules and add specific routes
 //app.use("/house",houseRouter);
 

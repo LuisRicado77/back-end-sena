@@ -38,6 +38,7 @@ export class ApplicationService implements ILeaseRentalApplicationService {
             throw new UpdateError("Could not update with success");
         }
     }
+    
     async findById(
         id: ILeaseRentalApplication["idApplication"]
     ): Promise<ILeaseRentalApplication> {

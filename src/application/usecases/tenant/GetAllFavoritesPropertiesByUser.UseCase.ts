@@ -1,5 +1,5 @@
 import { GetError } from "../../../domain/errors/GetError";
-import { IFavorite } from "../../../domain/interfaces/Favorite.interface";
+import { IFavorite } from "../../../domain/interfaces/IFavorite.interface";
 import { IUser } from "../../../domain/interfaces/IUser.interface";
 import { IFavoriteService } from "../../../domain/services/IFavorite.service";
 

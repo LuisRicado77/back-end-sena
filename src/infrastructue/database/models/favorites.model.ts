@@ -33,6 +33,11 @@ export class FavoritesModel extends Model {
   })
   idProperty!: number;
 
+  @Column({
+    defaultValue: 1
+  })
+  isActive!:number
+
   
   @BelongsTo(() => UserModel)
   user!: UserModel;

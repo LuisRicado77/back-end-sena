@@ -1,5 +1,5 @@
 import { NotCreatedError } from "../../../domain/errors/NotCreatedError";
-import { IFavorite, IFavoriteCreate } from "../../../domain/interfaces/Favorite.interface";
+import { IFavorite, IFavoriteCreate } from "../../../domain/interfaces/IFavorite.interface";
 import { IFavoriteService } from "../../../domain/services/IFavorite.service";
 
 

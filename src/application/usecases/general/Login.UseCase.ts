@@ -8,7 +8,7 @@ export class LoginUseCase {
   constructor(
     private readonly userSrv: IUserService,
     private readonly tokenService: ITokenService
-  ) {}
+  ) { }
 
   async execute({
     email,
@@ -22,9 +22,8 @@ export class LoginUseCase {
 
       if (!existingUser) {
         throw new GetError("Could not find the user");
-
       }
-      console.log(existingUser)
+      console.log(existingUser);
 
       const isPasswordValid = await this.userSrv.verifyPassword(password);
 
@@ -39,11 +38,13 @@ export class LoginUseCase {
       const idRol = existingUser.idRol;
 
       if (!idRol) {
-        throw new GetError("User role ID (idRol) was not found in the database");
+        throw new GetError(
+          "User role ID (idRol) was not found in the database"
+        );
       }
 
       const token = await this.tokenService.generateToken(payload);
-      console.log(idRol, existingUser.email, isPasswordValid)
+      console.log(idRol, existingUser.email, isPasswordValid);
 
       return { token, idRol };
     } catch (error) {

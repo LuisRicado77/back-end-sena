@@ -1,5 +1,6 @@
 import Joi from "joi";
 
+
 const title = Joi.string();
 const typeProperty = Joi.string();
 const address = Joi.string();
@@ -13,12 +14,11 @@ const squareMeters = Joi.string();
 const rentalPrice = Joi.number();
 const status = Joi.string();
 const description = Joi.string();
-const picture1 = Joi.string();
-const picture2 = Joi.string();
-const picture3 = Joi.string();
-const picture4 = Joi.string();
-const picture5 = Joi.string();
+const idLessor = Joi.number();
+const images = Joi.string();
+
 const isActive = Joi.number();
+
 
 export const propertySchemaCreate = Joi.object({
   title: Joi.required(),
@@ -34,11 +34,8 @@ export const propertySchemaCreate = Joi.object({
   rentalPrice: Joi.required(),
   status: Joi.optional(),
   description: Joi.optional(),
-  picture1: Joi.optional(),
-  picture2: Joi.optional(),
-  picture3: Joi.optional(),
-  picture4: Joi.optional(),
-  picture5: Joi.optional(),
+  idLessor: Joi.required(),
+  images: Joi.optional(),
   isActive: Joi.optional(),
 });
 
@@ -56,10 +53,6 @@ export const propertySchemaUpdate = Joi.object({
   rentalPrice: rentalPrice,
   status: status.optional(),
   description: description,
-  picture1: picture1.optional(),
-  picture2: picture2.optional(),
-  picture3: picture3.optional(),
-  picture4: picture4.optional(),
-  picture5: picture5.optional(),
+  picture1: images.optional(),
   isActive: isActive.optional(),
 });
