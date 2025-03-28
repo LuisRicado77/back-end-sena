@@ -26,7 +26,6 @@ const userRouter = Router();
 
 //register an user
 userRouter.post("/",schemaValidator(userSchemaCreate) ,async (req: Request, res: Response) =>{
-    
    try {
     const body = req.body
     ResponseAdapter.handler(registerUserUseCase.execute(body), req, res);

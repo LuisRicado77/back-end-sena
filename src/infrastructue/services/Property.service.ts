@@ -59,6 +59,7 @@ export class PropertyService implements IPropertyService {
       // console.log(property.city);
       console.log("lo que entras");
       console.log(property.typeProperty);
+      console.log(property);
 
       console.log("se esta ejeucntadon crear en el servicio property");
 
@@ -69,6 +70,7 @@ export class PropertyService implements IPropertyService {
       }
 
       console.log("lo que sube a database");
+      console.log(propertyCreated);
       console.log(propertyCreated.typeProperty);
 
       const newProperty: IProperty = {
@@ -91,9 +93,10 @@ export class PropertyService implements IPropertyService {
         lastNamesLessor: propertyCreated.Lessor?.lastNames,
         isActive: propertyCreated.isActive,
       };
-
+      console.log(newProperty)
       return newProperty;
     } catch (error) {
+      console.log(error)
       console.error("Error adding an property:", error); // Log del error real
       throw new NotCreatedError("Could not create the property:");
     }

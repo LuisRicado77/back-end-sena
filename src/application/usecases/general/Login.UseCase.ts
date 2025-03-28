@@ -16,7 +16,7 @@ export class LoginUseCase {
   }: {
     email: string;
     password: string;
-  }): Promise<{ token: string; idRol?: number }> {
+  }): Promise<{ token: string; idRol?: number;idUser?:number }> {
     try {
       const existingUser = await this.userSrv.findByEmail(email);
 
@@ -36,6 +36,8 @@ export class LoginUseCase {
         names: existingUser.names,
       };
       const idRol = existingUser.idRol;
+      const id = existingUser.idUser;
+      const idUser = parseInt(id);
 
       if (!idRol) {
         throw new GetError(
@@ -46,7 +48,7 @@ export class LoginUseCase {
       const token = await this.tokenService.generateToken(payload);
       console.log(idRol, existingUser.email, isPasswordValid);
 
-      return { token, idRol };
+      return { token, idRol, idUser};                              
     } catch (error) {
       throw new AuthenticationError("The password y email are incorrect");
     }

@@ -15,7 +15,7 @@ const rentalPrice = Joi.number();
 const status = Joi.string();
 const description = Joi.string();
 const idLessor = Joi.number();
-const images = Joi.string();
+const images = Joi.array();
 
 const isActive = Joi.number();
 
@@ -34,7 +34,7 @@ export const propertySchemaCreate = Joi.object({
   rentalPrice: Joi.required(),
   status: Joi.optional(),
   description: Joi.optional(),
-  idLessor: Joi.required(),
+  idLessor: Joi.optional(),
   images: Joi.optional(),
   isActive: Joi.optional(),
 });
