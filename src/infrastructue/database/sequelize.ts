@@ -10,14 +10,19 @@ import { UserModel } from "./models/user.model";
 import { FavoritesModel } from "./models/favorites.model";
 import { ApplicationModel } from "./models/application.model";
 
+
+
 const sequelize = new Sequelize({
-  port: 3307,
-  database: 'testsena',
+  host: 'projectsena.mysql.database.azure.com',
+  port: 3306,
+  database: 'senabd',
   dialect: 'mysql', 
-  username: 'root',
-  password: '3015916341Luis',
+  username: 'luis',
+  password: '3015916341Ricardo.',
   models: [ApplicationModel,UserModel,ContractModel,ReceiptModel, RolModel, RentalModel,PropertyModel, PaymentModel,FavoritesModel,ReviewModel], 
   logging: console.log
 });
+
+
 
 export default sequelize;
