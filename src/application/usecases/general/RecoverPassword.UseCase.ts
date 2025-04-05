@@ -13,7 +13,7 @@ export class RecoverPasswordUseCase{
             if(!existingUser){throw new GetError("Could not find it")
 
             }else{
-                const  isTheOldPassword = await this.userSrv.verifyPassword(oldPassword, existingUser)
+                const  isTheOldPassword = await this.userSrv.verifyPassword(oldPassword)
                 if(isTheOldPassword == false){throw new Error("The password is not the same")}
                 
                 else{
