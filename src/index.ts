@@ -51,7 +51,7 @@ const startApp = async () => {
 
     // Habilitar restricciones de clave foránea
     await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
-    app.listen(3001, () =>{
+    app.listen(3001,'0.0.0.0', () =>{
       console.log("server running in port 3001")
     })
   } catch (error) {
